@@ -1,0 +1,339 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Swagger Petstore - OpenAPI 3.0",
+        "description": "API Documentation for managed players",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5000/api/",
+            "description": "localhost"
+        }
+    ],
+    "tags": [
+        {
+            "name": "players",
+            "description": "Everything about your Players"
+        }
+    ],
+    "basePath": "/api",
+    "paths": {
+        "/players": {
+            "get": {
+                "tags": [
+                    "players"
+                ],
+                "summary": "get all players data",
+                "description": "Returns list of all players",
+                "operationId": "getAllPlayers",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "players"
+                ],
+                "summary": "post players data",
+                "consumes": "application/x-www-form-urlencoded",
+                "requestBody": {
+                    "description": "add new players",
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "user.username"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user.email@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "user.password"
+                                    },
+                                    "exp": {
+                                        "type": "integer",
+                                        "description": "Player Experience",
+                                        "format": "int64",
+                                        "example": 150000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/players/{id}": {
+            "get": {
+                "tags": [
+                    "players"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Players ID"
+                    }
+                ],
+                "summary": "get current players data",
+                "description": "Returns data player",
+                "operationId": "getCurrentPlayer",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "players"
+                ],
+                "summary": "Update an existing players",
+                "description": "Update an existing player by Id",
+                "consumes": "application/x-www-form-urlencoded",
+                "operationId": "updatePlayers",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Players ID"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update an existent players",
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "experience": {
+                                        "type": "integer",
+                                        "description": "Player Experience",
+                                        "format": "int64"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Players"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Pet not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "players"
+                ],
+                "summary": "delete existing players",
+                "description": "Delete existing player by Id",
+                "consumes": "application/x-www-form-urlencoded",
+                "operationId": "deletePlayers",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Players ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    }
+                }
+            }
+        },
+        "/players/exp/{id}": {
+            "post": {
+                "tags": [
+                    "players"
+                ],
+                "summary": "Update an existing players",
+                "description": "Update an existing pet by Id",
+                "consumes": "application/x-www-form-urlencoded",
+                "operationId": "updateExpPlayers",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "description": "Players ID"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update an existent players",
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "exp": {
+                                        "type": "integer",
+                                        "description": "Player Experience",
+                                        "format": "int64"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Players"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Pet not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Players": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 10
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "user.username"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "userpassword"
+                    },
+                    "experience": {
+                        "type": "integer",
+                        "description": "Player Experience",
+                        "format": "int64",
+                        "example": 1000
+                    },
+                    "lvl": {
+                        "type": "integer",
+                        "description": "Player Experience",
+                        "format": "int64",
+                        "example": 10
+                    }
+                }
+            }
+        },
+        "requestBodies": {
+            "Players": {
+                "description": "Pet object that needs to be added to the store",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Players"
+                        }
+                    },
+                    "application/xml": {
+                        "schema": {
+                            "$ref": "#/components/schemas/Players"
+                        }
+                    }
+                }
+            },
+            "UserArray": {
+                "description": "List of user object",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/components/schemas/Players"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
